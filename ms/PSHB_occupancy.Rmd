@@ -1,0 +1,29 @@
+---
+title: "Occupancy models for PSHB"
+output: html_notebook
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+bibliography: "PSHB_occupancy.bib"
+---
+
+
+# Questions
+
+
+We look to address a number of questions pertaining to the management of PSHB.  These are (in no particular order):
+
+1. 
+2. 
+
+# Data
+
+There are several datasets available to us.  These are:
+
+1. 
+2. 
+
+# Modelling approach
+
+Many of the above questions can be addressed using an occupancy modelling approach [@mackenzie2002].  
+
+
+# Bibliography
