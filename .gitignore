@@ -50,3 +50,9 @@ rsconnect/
 
 # Mac business
 .DS_Store
+
+# user directories
+out/
+
+# output files
+*.html
