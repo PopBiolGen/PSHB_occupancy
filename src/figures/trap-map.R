@@ -1,9 +1,10 @@
 library(sf)
 library(tmap)
+library(tmaptools)
 
 source("src/data-aggregation-I.R")
 
-d <- st_as_sf(od, coords = c("lon", "lat"), CRS = 4326)
+d <- sf_points <- st_as_sf(od, coords = c("lon", "lat"), crs = 4326)
 
 # read a basemap in from ESRI
 bm <- read_osm(
