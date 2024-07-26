@@ -3,6 +3,7 @@ library(lubridate)
 library(stringr)
 library(sf)
 
+
 # define the data directory
 data_dir <- file.path(Sys.getenv("DATA_PATH"), "PSHB")
 
@@ -27,6 +28,23 @@ ct <- ct %>% select(spatial = Spatial, trapID = TrapID) %>%
 # merge the two datasets
 od <- left_join(ts, ct) %>%
       filter(!is.na(abundance) & !is.na(lat) & !is.na(lon))
+
+#tidy up
+rm(ct, ts)
+
+##### Spatial aggregation ####
+library(raster)
+# make into simple points spatial feature
+points_d <- st_as_sf(od, coords = c("lon", "lat"), crs = 4326)
+
+# set up a grid
+bbox <- st_bbox(points_d)
+cell_size <- 0.1  # in degrees
+grid <- st_make_grid(points_d, cellsize = cell_size, square = TRUE)
+sf_grid <- st_sf(geometry = st_sfc(grid)) # Convert grid to sf object
+# spatial join
+grid_d <- st_join(sf_grid, points_d, join = st_intersects) %>%
+  filter(!is.na(trapID))
 
 
 
