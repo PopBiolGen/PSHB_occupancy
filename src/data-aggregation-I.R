@@ -1,6 +1,7 @@
 library(dplyr)
 library(lubridate)
 library(stringr)
+library(sf)
 
 # define the data directory
 data_dir <- file.path(Sys.getenv("DATA_PATH"), "PSHB")
@@ -23,7 +24,9 @@ ct <- ct %>% select(spatial = Spatial, trapID = TrapID) %>%
               select(-spatial) %>%
               distinct(trapID, .keep_all = TRUE)
 
-
+# merge the two datasets
 od <- left_join(ts, ct) %>%
-      filter(!is.na(abundance))
+      filter(!is.na(abundance) & !is.na(lat) & !is.na(lon))
+
+
 
