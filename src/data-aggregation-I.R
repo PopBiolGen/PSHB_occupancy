@@ -27,13 +27,13 @@ ct <- ct %>% select(spatial = Spatial, trapID = TrapID) %>%
 
 # merge the two datasets
 od <- left_join(ts, ct) %>%
-      filter(!is.na(abundance) & !is.na(lat) & !is.na(lon))
+      filter(!is.na(abundance) & !is.na(lat) & !is.na(lon)) %>%
+      filter(lat > -32.161 & lat < -31.804 & lon > 115.6 & lon < 116.018)
 
 #tidy up
 rm(ct, ts)
 
 ##### Spatial aggregation ####
-library(raster)
 # make into simple points spatial feature
 points_d <- st_as_sf(od, coords = c("lon", "lat"), crs = 4326)
 

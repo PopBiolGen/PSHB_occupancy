@@ -10,7 +10,7 @@ source("src/data-aggregation-I.R")
 bm <- read_osm(
   points_d,
   type = "osm", # for satellite image, "esri-imagery",
-  zoom = 8,
+  zoom = 10,
   ext = 1
 )
 
@@ -28,6 +28,7 @@ tmap_save(p, filename = paste0("out/stat-trap-map.pdf"))
 grid_agg <- grid_d %>%
   group_by(geometry) %>%
   summarise(count = n())
+
 p <- ggplot() +
   geom_sf(data = grid_agg, aes(fill = count)) +
   geom_sf(data = points_d, color = "red", size = 0.5) +
